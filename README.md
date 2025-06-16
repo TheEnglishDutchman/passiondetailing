@@ -1,94 +1,57 @@
 # Passion Detailing Website
 
-A modern, responsive website for a luxury car detailing business built with HTML, Tailwind CSS, and JavaScript.
+A modern, responsive website for a premium car detailing service.
+
+## Setup Instructions
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start the development server:
+```bash
+npm start
+```
+
+3. Build for production:
+```bash
+npm run build
+```
+
+## Required Images
+
+The following images are required in the `src/images` directory:
+
+- `hero-bg.jpg` - A high-quality image of a luxury car (recommended size: 1920x1080)
+- `about.jpg` - An image showing the detailing team or process (recommended size: 800x600)
+- `interior-detail.jpg` - Interior detailing service image (recommended size: 600x400)
+- `steam-cleaning.jpg` - Steam cleaning service image (recommended size: 600x400)
+- `seat-shampoo.jpg` - Seat cleaning service image (recommended size: 600x400)
+- `exterior-detail.jpg` - Exterior detailing service image (recommended size: 600x400)
+- `paint-correction.jpg` - Paint correction service image (recommended size: 600x400)
+- `ceramic-coating.jpg` - Ceramic coating service image (recommended size: 600x400)
+- `favicon.png` - Website favicon (recommended size: 32x32)
 
 ## Features
 
-- 🎨 Modern, clean design with smooth animations
-- 📱 Fully responsive layout for all devices
-- ⚡ Fast loading and optimized performance
-- ♿ Accessibility features included
-- 📝 Contact form with validation
-- 🔍 SEO optimized
-- 🎯 Smooth scrolling navigation
-- 🌙 Dark theme with accent colors
+- Responsive design that works on all devices
+- Modern and clean user interface
+- Smooth scrolling and animations
+- Contact form with validation
+- Mobile-friendly navigation
+- Optimized images and assets
+- SEO-friendly structure
 
 ## Technologies Used
 
 - HTML5
-- Tailwind CSS
+- CSS3
 - JavaScript (ES6+)
-- Google Fonts (Montserrat)
-- Intersection Observer API
-- CSS Animations
-
-## Getting Started
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/passion-detailing.git
-```
-
-2. Open `index.html` in your browser or use a local server:
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx serve
-```
-
-## Project Structure
-
-```
-passion-detailing/
-├── index.html          # Main HTML file
-├── styles.css          # Custom styles and animations
-├── script.js           # JavaScript functionality
-├── README.md          # Documentation
-└── favicon.png        # Website favicon
-```
-
-## Customization
-
-### Colors
-The color scheme can be modified in the Tailwind configuration within `index.html`:
-
-```javascript
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                primary: '#1a1a1a',
-                secondary: '#gold',
-                accent: '#0066cc'
-            }
-        }
-    }
-}
-```
-
-### Images
-Replace the hero background image URL in `index.html`:
-```html
-<div class="absolute inset-0 bg-[url('your-image-url')] bg-cover bg-center"></div>
-```
-
-### Content
-Update the content in `index.html` to match your business information:
-- Services
-- Contact information
-- Social media links
-- Business hours
-- Location
-
-## Performance Optimization
-
-- Images are optimized for web
-- CSS and JavaScript are minified
-- Lazy loading for images
-- Efficient animations using CSS transforms
-- Minimal dependencies
+- Font Awesome for icons
+- Google Fonts
+- PostCSS for CSS processing
+- Live Server for development
 
 ## Browser Support
 
@@ -98,20 +61,6 @@ Update the content in `index.html` to match your business information:
 - Edge (latest)
 - Opera (latest)
 
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Images from [Unsplash](https://unsplash.com)
-- Icons from [Heroicons](https://heroicons.com)
-- Fonts from [Google Fonts](https://fonts.google.com) 
+MIT License 
