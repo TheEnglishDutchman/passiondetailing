@@ -184,70 +184,148 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// Form Validation with improved UX
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    const formInputs = contactForm.querySelectorAll('input, textarea');
-    
-    // Real-time validation
-    formInputs.forEach(input => {
-        input.addEventListener('input', () => {
-            validateInput(input);
-        });
-        
-        input.addEventListener('blur', () => {
-            validateInput(input);
-        });
-    });
-    
-    function validateInput(input) {
-        const value = input.value.trim();
-        const isValid = value !== '';
-        
-        input.classList.toggle('error', !isValid);
-        
-        // Update aria-invalid for accessibility
-        input.setAttribute('aria-invalid', !isValid);
-        
-        // Show/hide error message
-        let errorMessage = input.nextElementSibling;
-        if (!errorMessage || !errorMessage.classList.contains('error-message')) {
-            errorMessage = document.createElement('div');
-            errorMessage.className = 'error-message';
-            input.parentNode.insertBefore(errorMessage, input.nextSibling);
-        }
-        
-        errorMessage.textContent = isValid ? '' : 'This field is required';
-    }
-    
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        let isValid = true;
-        formInputs.forEach(input => {
-            if (!validateInput(input)) {
-                isValid = false;
-            }
-        });
+// Form Validation and Submission
+const contactForm = document.getElementById('contact-form');
+const formGroups = contactForm.querySelectorAll('.form-group');
+const submitButton = contactForm.querySelector('.submit-button');
 
-        if (isValid) {
-            // Show loading state
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            
-            // Simulate form submission
-            setTimeout(() => {
-                alert('Thank you for your message. We will get back to you soon!');
-                contactForm.reset();
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }, 1000);
-        }
+// Validation patterns
+const patterns = {
+    name: /^[a-zA-Z\s]{2,50}$/,
+    email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+    phone: /^[0-9]{10}$/,
+    service: /^(interior|exterior|paint-correction|ceramic-coating|steam-cleaning|seat-restoration)$/
+};
+
+// Error messages
+const errorMessages = {
+    name: 'Please enter a valid name (2-50 characters, letters only)',
+    email: 'Please enter a valid email address',
+    phone: 'Please enter a valid 10-digit phone number',
+    service: 'Please select a service',
+    message: 'Message cannot exceed 500 characters'
+};
+
+// Real-time validation
+formGroups.forEach(group => {
+    const input = group.querySelector('input, select, textarea');
+    if (!input) return;
+
+    const errorElement = group.querySelector('.error-message');
+    
+    input.addEventListener('input', () => {
+        validateField(input, errorElement);
+        updateSubmitButton();
     });
+
+    input.addEventListener('blur', () => {
+        validateField(input, errorElement);
+        updateSubmitButton();
+    });
+});
+
+function validateField(input, errorElement) {
+    const value = input.value.trim();
+    const fieldName = input.name;
+    let isValid = true;
+    let errorMessage = '';
+
+    // Skip validation for empty required fields on input
+    if (value === '' && input.required) {
+        if (input.type === 'email' || input.type === 'tel') {
+            isValid = false;
+            errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+        } else {
+            return;
+        }
+    } else if (value !== '') {
+        if (patterns[fieldName] && !patterns[fieldName].test(value)) {
+            isValid = false;
+            errorMessage = errorMessages[fieldName];
+        }
+
+        if (fieldName === 'message' && value.length > 500) {
+            isValid = false;
+            errorMessage = errorMessages.message;
+        }
+    }
+
+    // Update UI
+    input.parentElement.classList.toggle('error', !isValid);
+    input.parentElement.classList.toggle('success', isValid && value !== '');
+    
+    if (errorElement) {
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = isValid ? 'none' : 'block';
+    }
+
+    return isValid;
+}
+
+function updateSubmitButton() {
+    const isValid = Array.from(formGroups).every(group => {
+        const input = group.querySelector('input, select, textarea');
+        if (!input || !input.required) return true;
+        return validateField(input, group.querySelector('.error-message'));
+    });
+
+    submitButton.disabled = !isValid;
+}
+
+// Form submission
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate all fields
+    const isValid = Array.from(formGroups).every(group => {
+        const input = group.querySelector('input, select, textarea');
+        if (!input) return true;
+        return validateField(input, group.querySelector('.error-message'));
+    });
+
+    if (!isValid) {
+        showFormFeedback('Please correct the errors before submitting.', 'error');
+        return;
+    }
+
+    // Show loading state
+    submitButton.classList.add('loading');
+    submitButton.disabled = true;
+
+    try {
+        // Simulate form submission (replace with actual API call)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Show success message
+        showFormFeedback('Thank you for your inquiry! We will contact you shortly.', 'success');
+        contactForm.reset();
+        formGroups.forEach(group => {
+            group.classList.remove('success', 'error');
+        });
+    } catch (error) {
+        showFormFeedback('An error occurred. Please try again later.', 'error');
+    } finally {
+        submitButton.classList.remove('loading');
+        updateSubmitButton();
+    }
+});
+
+function showFormFeedback(message, type) {
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('form-error');
+
+    if (type === 'success') {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+    } else {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+    }
+
+    // Scroll to feedback
+    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 // Intersection Observer for Fade-in Effects with improved performance

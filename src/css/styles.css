@@ -59,12 +59,102 @@ input:focus, textarea:focus {
 
 /* Service Card Hover Effect */
 .service-card {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    perspective: 1000px;
+    height: 300px;
+    margin-bottom: 2rem;
 }
 
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+.service-card:hover .service-card-inner {
+    transform: rotateY(180deg);
+}
+
+.service-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.service-card-front,
+.service-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.service-card-front {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card-front i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.service-card-back {
+    background: var(--accent-color);
+    color: var(--text-dark);
+    transform: rotateY(180deg);
+    padding: 2rem;
+}
+
+.service-card-back h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.service-card-back p {
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.service-card-back ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.service-card-back ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.service-card-back ul li:before {
+    content: "•";
+    color: var(--text-dark);
+    position: absolute;
+    left: 0;
+}
+
+.service-cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--text-dark);
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.service-cta:hover {
+    background: var(--text-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Button Hover Effect */
@@ -552,20 +642,22 @@ h2::after {
 }
 
 .contact-form {
-    background: var(--white);
-    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: var(--dark-gray);
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
     font-weight: 500;
 }
 
@@ -573,35 +665,172 @@ h2::after {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 1rem;
-    border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius);
-    font-family: var(--font-secondary);
-    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    color: var(--text-light);
     transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 2px rgba(201, 169, 89, 0.2);
     outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2);
 }
 
-.submit-btn {
-    background: var(--gold);
-    color: var(--white);
-    padding: 1rem 2rem;
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: #ff4444;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.form-group input:invalid:not(:placeholder-shown) + .error-message,
+.form-group select:invalid:not(:placeholder-shown) + .error-message,
+.form-group textarea:invalid:not(:placeholder-shown) + .error-message {
+    display: block;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-color);
+    color: var(--text-dark);
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 5px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.submit-btn:hover {
-    background: var(--primary-color);
+.submit-button:hover {
+    background: var(--accent-color-hover);
     transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.submit-button .loading-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--text-dark);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite;
+}
+
+.submit-button.loading .button-text {
+    visibility: hidden;
+}
+
+.submit-button.loading .loading-spinner {
+    display: block;
+}
+
+.form-feedback {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.success-message {
+    color: #00C851;
+    background: rgba(0, 200, 81, 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+    display: none;
+}
+
+.error-message {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+    display: none;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Form Validation Styles */
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+    border-color: #00C851;
+}
+
+.form-group input:focus:valid,
+.form-group select:focus:valid,
+.form-group textarea:focus:valid {
+    box-shadow: 0 0 0 2px rgba(0, 200, 81, 0.2);
+}
+
+/* Form Placeholder Styles */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Form Select Styles */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* Form Textarea Styles */
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Form Group Focus Styles */
+.form-group:focus-within label {
+    color: var(--accent-color);
+}
+
+/* Form Group Error Styles */
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+    border-color: #ff4444;
+}
+
+.form-group.error label {
+    color: #ff4444;
+}
+
+/* Form Group Success Styles */
+.form-group.success input,
+.form-group.success select,
+.form-group.success textarea {
+    border-color: #00C851;
+}
+
+.form-group.success label {
+    color: #00C851;
 }
 
 .contact-info {
@@ -918,8 +1147,8 @@ h2::after {
 
 /* Gallery Section */
 .gallery {
-    background: var(--secondary-color);
-    padding: 6rem 0;
+    padding: 5rem 0;
+    background: var(--bg-dark);
 }
 
 .gallery-grid {
@@ -931,16 +1160,22 @@ h2::after {
 
 .gallery-item {
     position: relative;
+    height: 300px;
+    border-radius: 10px;
     overflow: hidden;
-    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.gallery-item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .gallery-overlay {
@@ -949,48 +1184,40 @@ h2::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--gradient-overlay);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    color: var(--white);
+    transition: all 0.3s ease;
+    padding: 2rem;
     text-align: center;
-    padding: 1rem;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
 }
 
 .gallery-item:hover .gallery-overlay {
     opacity: 1;
 }
 
+.gallery-overlay h3 {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.gallery-overlay p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
 /* Testimonials Section */
-.testimonials {
-    padding: 6rem 0;
-    background: var(--primary-color);
-}
-
-.testimonials-slider {
-    margin-top: 3rem;
-    position: relative;
-}
-
 .testimonial-card {
-    background: var(--white);
-    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
     padding: 2rem;
-    box-shadow: var(--box-shadow);
     margin: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.testimonial-card:hover {
-    transform: translateY(-5px);
 }
 
 .testimonial-content {
@@ -999,23 +1226,34 @@ h2::after {
 }
 
 .testimonial-content i {
-    color: var(--gold);
+    color: var(--accent-color);
     font-size: 2rem;
     margin-bottom: 1rem;
+}
+
+.testimonial-content p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 }
 
 .testimonial-author {
     display: flex;
     align-items: center;
-    margin-top: 1.5rem;
+    gap: 1rem;
 }
 
-.testimonial-author img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 1rem;
+.author-info h4 {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.author-info p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 /* Back to Top Button */
