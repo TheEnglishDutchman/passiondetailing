@@ -39,17 +39,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-accent-3);
+    background: var(--bg-tertiary);
     border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-gold);
+    background: var(--text-secondary);
 }
 
 /* Form Focus Styles */
 input:focus, textarea:focus {
-    box-shadow: 0 0 0 2px rgba(var(--gold-rgb), 0.2);
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
 }
 
 /* Mobile Menu Animation */
@@ -63,7 +64,7 @@ input:focus, textarea:focus {
     height: 300px;
     margin-bottom: 2rem;
     background-color: var(--bg-secondary);
-    border: 1px solid var(--color-accent-3);
+    border: 1px solid var(--bg-tertiary);
 }
 
 .service-card:hover .service-card-inner {
@@ -228,13 +229,6 @@ img {
     /* Base Colors */
     --color-black: #000000;
     --color-white: #F5F5F5;
-    --color-gold: #FFD700;
-    --color-dark-gold: #B8860B;
-    
-    /* Accent Colors */
-    --color-accent-1: #1A1A1A;
-    --color-accent-2: #2A2A2A;
-    --color-accent-3: #333333;
     
     /* Text Colors */
     --text-primary: var(--color-white);
@@ -243,20 +237,17 @@ img {
     
     /* Background Colors */
     --bg-primary: var(--color-black);
-    --bg-secondary: var(--color-accent-1);
-    --bg-tertiary: var(--color-accent-2);
+    --bg-secondary: #1A1A1A;
+    --bg-tertiary: #2A2A2A;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--color-black) 0%, var(--color-accent-1) 100%);
-    --gradient-secondary: linear-gradient(135deg, var(--color-accent-1) 0%, var(--color-accent-2) 100%);
-    --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-dark-gold) 100%);
-    --gradient-overlay: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
+    --gradient-primary: linear-gradient(135deg, var(--color-black) 0%, var(--bg-secondary) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
     
     /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
     
     /* Borders */
     --border-light: 1px solid rgba(255,255,255,0.1);
@@ -447,7 +438,7 @@ a:hover {
 }
 
 .mobile-menu-btn.active span {
-    background-color: var(--color-gold);
+    background-color: var(--text-secondary);
 }
 
 /* Hero Section */
@@ -482,7 +473,7 @@ a:hover {
 .cta-button {
     display: inline-block;
     padding: var(--spacing-md) var(--spacing-lg);
-    background: var(--gradient-gold);
+    background: var(--color-white);
     color: var(--color-black);
     font-weight: 600;
     border-radius: var(--radius-md);
@@ -490,9 +481,8 @@ a:hover {
 }
 
 .cta-button:hover {
-    background: var(--color-gold);
+    background: var(--text-secondary);
     box-shadow: var(--shadow-lg);
-    color: var(--color-black);
 }
 
 /* About Section */
@@ -689,7 +679,7 @@ a:hover {
     padding: var(--spacing-md);
     background-color: var(--bg-tertiary);
     color: var(--text-primary);
-    border: 1px solid var(--color-accent-3);
+    border: 1px solid var(--bg-tertiary);
     border-radius: var(--radius-md);
     transition: all var(--transition-normal);
 }
@@ -698,8 +688,8 @@ a:hover {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--color-gold);
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    border-color: var(--color-white);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .submit-button {
@@ -724,7 +714,7 @@ a:hover {
 .footer {
     background-color: var(--bg-secondary);
     padding: var(--spacing-xl) 0 var(--spacing-md);
-    border-top: 1px solid var(--color-accent-3);
+    border-top: 1px solid var(--bg-tertiary);
 }
 
 .footer-content {
@@ -759,7 +749,7 @@ a:hover {
 }
 
 .footer-links ul li a:hover {
-    color: var(--color-gold);
+    color: var(--text-primary);
 }
 
 .social-links {
@@ -789,7 +779,7 @@ a:hover {
     position: fixed;
     bottom: var(--spacing-lg);
     right: var(--spacing-lg);
-    background-color: var(--color-gold);
+    background-color: var(--color-white);
     color: var(--color-black);
     width: 40px;
     height: 40px;
@@ -811,7 +801,7 @@ a:hover {
 }
 
 .back-to-top:hover {
-    background-color: var(--color-dark-gold);
+    background-color: var(--text-secondary);
     transform: translateY(-2px);
 }
 
@@ -968,4 +958,10 @@ a:hover {
         max-width: none;
         padding: 0;
     }
+}
+
+/* Selection */
+::selection {
+    background-color: var(--color-white);
+    color: var(--color-black);
 } 
