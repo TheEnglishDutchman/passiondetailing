@@ -35,16 +35,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-black);
+    background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--gold);
-    border-radius: 5px;
+    background: var(--color-accent-3);
+    border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--gold-light);
+    background: var(--color-gold);
 }
 
 /* Form Focus Styles */
@@ -62,6 +62,8 @@ input:focus, textarea:focus {
     perspective: 1000px;
     height: 300px;
     margin-bottom: 2rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--color-accent-3);
 }
 
 .service-card:hover .service-card-inner {
@@ -92,7 +94,7 @@ input:focus, textarea:focus {
 }
 
 .service-card-front {
-    background: var(--gradient-dark);
+    background: var(--gradient-primary);
     border: var(--border-light);
 }
 
@@ -224,35 +226,36 @@ img {
 /* Modern Luxury Car Detailing Website Styles */
 :root {
     /* Base Colors */
-    --black: #000000;
-    --white: #ffffff;
-    --gold: #ffd700;
-    --dark-gold: #b8860b;
+    --color-black: #000000;
+    --color-white: #F5F5F5;
+    --color-gold: #FFD700;
+    --color-dark-gold: #B8860B;
     
     /* Accent Colors */
-    --accent-1: #ffd700;
-    --accent-2: #b8860b;
-    --accent-3: #daa520;
+    --color-accent-1: #1A1A1A;
+    --color-accent-2: #2A2A2A;
+    --color-accent-3: #333333;
     
     /* Text Colors */
-    --text-primary: #ffffff;
-    --text-secondary: #e0e0e0;
-    --text-muted: #a0a0a0;
+    --text-primary: var(--color-white);
+    --text-secondary: #CCCCCC;
+    --text-muted: #999999;
     
     /* Background Colors */
-    --bg-black: #000000;
-    --bg-dark: #111111;
-    --bg-darker: #0a0a0a;
+    --bg-primary: var(--color-black);
+    --bg-secondary: var(--color-accent-1);
+    --bg-tertiary: var(--color-accent-2);
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--black) 0%, var(--bg-dark) 100%);
-    --gradient-accent: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+    --gradient-primary: linear-gradient(135deg, var(--color-black) 0%, var(--color-accent-1) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--color-accent-1) 0%, var(--color-accent-2) 100%);
+    --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-dark-gold) 100%);
     --gradient-overlay: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
     
     /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
     --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
     
     /* Borders */
@@ -273,15 +276,15 @@ img {
     --radius-full: 9999px;
     
     /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-normal: 300ms ease;
-    --transition-slow: 500ms ease;
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
     
-    /* Z-index Layers */
-    --z-loader: 1000;
-    --z-navbar: 100;
-    --z-modal: 200;
-    --z-tooltip: 300;
+    /* Z-index layers */
+    --z-base: 1;
+    --z-above: 2;
+    --z-modal: 1000;
+    --z-tooltip: 2000;
 }
 
 /* Reset & Base Styles */
@@ -303,7 +306,7 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
-    background: var(--bg-black);
+    background-color: var(--bg-primary);
     overflow-x: hidden;
 }
 
@@ -313,6 +316,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
 }
 
 h1 {
@@ -333,6 +337,7 @@ h4 {
 
 p {
     margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
 }
 
 a {
@@ -375,14 +380,15 @@ a:hover {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: var(--z-navbar);
-    background: transparent;
+    z-index: var(--z-above);
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
     transition: background-color var(--transition-normal);
 }
 
 .navbar.scrolled {
-    background: var(--bg-black);
-    box-shadow: var(--shadow-lg);
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow-md);
 }
 
 .navbar-container {
@@ -436,6 +442,14 @@ a:hover {
     padding: var(--spacing-sm);
 }
 
+.mobile-menu-btn span {
+    background-color: var(--text-primary);
+}
+
+.mobile-menu-btn.active span {
+    background-color: var(--color-gold);
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -455,39 +469,42 @@ a:hover {
 
 .hero h1 {
     margin-bottom: var(--spacing-md);
-    color: var(--gold);
+    color: var(--text-primary);
+    text-shadow: var(--shadow-md);
 }
 
 .hero p {
     font-size: 1.25rem;
     margin-bottom: var(--spacing-lg);
+    color: var(--text-secondary);
 }
 
 .cta-button {
     display: inline-block;
     padding: var(--spacing-md) var(--spacing-lg);
-    background: var(--gold);
-    color: var(--black);
+    background: var(--gradient-gold);
+    color: var(--color-black);
     font-weight: 600;
     border-radius: var(--radius-md);
     transition: all var(--transition-normal);
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
+    background: var(--color-gold);
     box-shadow: var(--shadow-lg);
-    color: var(--black);
+    color: var(--color-black);
 }
 
 /* About Section */
 .about {
     padding: var(--spacing-xl) 0;
-    background: var(--bg-dark);
+    background: var(--bg-secondary);
 }
 
 .about-content {
     display: grid;
     gap: var(--spacing-xl);
+    background-color: var(--bg-secondary);
 }
 
 .about-text {
@@ -505,7 +522,7 @@ a:hover {
 .feature {
     text-align: center;
     padding: var(--spacing-lg);
-    background: var(--gradient-primary);
+    background: var(--bg-tertiary);
     border-radius: var(--radius-lg);
     transition: transform var(--transition-normal);
 }
@@ -523,7 +540,7 @@ a:hover {
 /* Services Section */
 .services {
     padding: var(--spacing-xl) 0;
-    background: var(--bg-black);
+    background: var(--bg-primary);
 }
 
 .section-subtitle {
@@ -549,15 +566,15 @@ a:hover {
 }
 
 .service-card {
-    background: var(--gradient-primary);
+    background: var(--bg-secondary);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     transition: all var(--transition-normal);
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
+    background-color: var(--bg-tertiary);
+    box-shadow: var(--shadow-lg);
 }
 
 .service-card i {
@@ -607,7 +624,7 @@ a:hover {
 /* Gallery Section */
 .gallery {
     padding: var(--spacing-xl) 0;
-    background: var(--bg-dark);
+    background: var(--bg-primary);
 }
 
 .gallery-grid {
@@ -619,7 +636,7 @@ a:hover {
 /* Contact Section */
 .contact {
     padding: var(--spacing-xl) 0;
-    background: var(--bg-black);
+    background: var(--bg-primary);
 }
 
 .contact-content {
@@ -650,7 +667,7 @@ a:hover {
 }
 
 .contact-form {
-    background: var(--gradient-primary);
+    background: var(--bg-secondary);
     padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
 }
@@ -670,10 +687,10 @@ a:hover {
 .form-group textarea {
     width: 100%;
     padding: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-md);
+    background-color: var(--bg-tertiary);
     color: var(--text-primary);
+    border: 1px solid var(--color-accent-3);
+    border-radius: var(--radius-md);
     transition: all var(--transition-normal);
 }
 
@@ -681,7 +698,7 @@ a:hover {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--gold);
+    border-color: var(--color-gold);
     box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
@@ -705,8 +722,9 @@ a:hover {
 
 /* Footer */
 .footer {
-    background: var(--bg-darker);
+    background-color: var(--bg-secondary);
     padding: var(--spacing-xl) 0 var(--spacing-md);
+    border-top: 1px solid var(--color-accent-3);
 }
 
 .footer-content {
@@ -714,6 +732,7 @@ a:hover {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
+    color: var(--text-secondary);
 }
 
 .footer-logo h3 {
@@ -740,7 +759,7 @@ a:hover {
 }
 
 .footer-links ul li a:hover {
-    color: var(--gold);
+    color: var(--color-gold);
 }
 
 .social-links {
@@ -755,7 +774,7 @@ a:hover {
 }
 
 .social-links a:hover {
-    color: var(--gold);
+    color: var(--color-gold);
     transform: translateY(-2px);
 }
 
@@ -770,8 +789,8 @@ a:hover {
     position: fixed;
     bottom: var(--spacing-lg);
     right: var(--spacing-lg);
-    background: var(--gold);
-    color: var(--black);
+    background-color: var(--color-gold);
+    color: var(--color-black);
     width: 40px;
     height: 40px;
     border-radius: var(--radius-full);
@@ -792,7 +811,7 @@ a:hover {
 }
 
 .back-to-top:hover {
-    background: var(--dark-gold);
+    background-color: var(--color-dark-gold);
     transform: translateY(-2px);
 }
 
@@ -803,11 +822,11 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-black);
+    background-color: var(--bg-primary);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: var(--z-loader);
+    z-index: var(--z-modal);
     transition: opacity var(--transition-normal);
 }
 
@@ -875,7 +894,7 @@ a:hover {
         right: -100%;
         width: 100%;
         height: 100vh;
-        background: var(--bg-black);
+        background-color: var(--bg-primary);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -892,6 +911,11 @@ a:hover {
     
     .hero h1 {
         font-size: 2.5rem;
+    }
+    
+    .service-card,
+    .testimonial-card {
+        background-color: var(--bg-tertiary);
     }
 }
 
