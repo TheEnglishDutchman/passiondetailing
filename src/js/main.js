@@ -3,120 +3,76 @@ AOS.init({
     duration: 800,
     easing: 'ease-in-out',
     once: true,
-    mirror: false,
-    disable: 'mobile'
+    mirror: false
 });
 
-// DOM Elements
-const loader = document.querySelector('.loader');
+// Loading screen
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.querySelector('.loader');
+    setTimeout(() => {
+        loader.classList.add('hidden');
+    }, 1000);
+});
+
+// Mobile menu toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
-const backToTop = document.getElementById('back-to-top');
-const navbar = document.querySelector('.navbar');
 
-// Loading Screen
-window.addEventListener('load', () => {
-    loader.classList.add('fade-out');
-    setTimeout(() => {
-        loader.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }, 500);
-});
-
-// Prevent scroll during loading
-document.body.style.overflow = 'hidden';
-
-// Mobile Menu Toggle with improved accessibility
 mobileMenuBtn.addEventListener('click', () => {
-    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-    mobileMenuBtn.classList.toggle('active');
     navLinks.classList.toggle('active');
-    
-    // Update aria-label
-    mobileMenuBtn.setAttribute('aria-label', 
-        isExpanded ? 'Open menu' : 'Close menu'
-    );
+    mobileMenuBtn.classList.toggle('active');
 });
 
-// Close mobile menu when clicking outside or pressing Escape
+// Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.navbar-container')) {
-        closeMobileMenu();
+        navLinks.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
     }
 });
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeMobileMenu();
-    }
-});
-
-function closeMobileMenu() {
-    mobileMenuBtn.classList.remove('active');
-    navLinks.classList.remove('active');
-    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-    mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-}
-
-// Smooth Scroll for Navigation Links with improved behavior
+// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
-            
-            closeMobileMenu();
+            // Close mobile menu after clicking a link
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
         }
     });
 });
 
-// Navbar Scroll Effect with throttling
+// Navbar scroll effect
+const navbar = document.querySelector('.navbar');
 let lastScroll = 0;
-const scrollThreshold = 50;
 
-function handleScroll() {
+window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    if (currentScroll > scrollThreshold) {
+    // Add/remove scrolled class
+    if (currentScroll > 50) {
         navbar.classList.add('scrolled');
-        if (currentScroll > lastScroll) {
-            navbar.classList.add('nav-hidden');
-        } else {
-            navbar.classList.remove('nav-hidden');
-        }
     } else {
-        navbar.classList.remove('scrolled', 'nav-hidden');
+        navbar.classList.remove('scrolled');
     }
     
     lastScroll = currentScroll;
-}
-
-window.addEventListener('scroll', () => {
-    requestAnimationFrame(handleScroll);
 });
 
-// Back to Top Button with improved visibility
-const backToTopThreshold = 300;
-let backToTopTimeout;
+// Back to top button
+const backToTop = document.getElementById('back-to-top');
 
 window.addEventListener('scroll', () => {
-    clearTimeout(backToTopTimeout);
-    
-    if (window.scrollY > backToTopThreshold) {
+    if (window.pageYOffset > 300) {
         backToTop.classList.add('visible');
     } else {
-        backToTopTimeout = setTimeout(() => {
-            backToTop.classList.remove('visible');
-        }, 200);
+        backToTop.classList.remove('visible');
     }
 });
 
@@ -128,210 +84,121 @@ backToTop.addEventListener('click', (e) => {
     });
 });
 
-// Service Cards Flip Effect with improved interaction
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const isFlipped = card.classList.contains('flipped');
-        card.classList.toggle('flipped');
-        
-        // Update aria-label for accessibility
-        const frontContent = card.querySelector('.service-card-front h4').textContent;
-        const backContent = card.querySelector('.service-card-back h4').textContent;
-        card.setAttribute('aria-label', 
-            isFlipped ? `Service: ${frontContent}` : `Service details: ${backContent}`
-        );
+// Service card hover effects
+const serviceCards = document.querySelectorAll('.service-card');
+
+serviceCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+        card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.2)';
     });
-});
-
-// Gallery Image Modal with improved functionality
-const galleryItems = document.querySelectorAll('.gallery-item');
-const modal = document.createElement('div');
-modal.className = 'modal';
-modal.setAttribute('role', 'dialog');
-modal.setAttribute('aria-modal', 'true');
-document.body.appendChild(modal);
-
-galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        const title = item.querySelector('.gallery-overlay h3')?.textContent || '';
-        const description = item.querySelector('.gallery-overlay p')?.textContent || '';
-        
-        modal.innerHTML = `
-            <div class="modal-content">
-                <img src="${img.src}" alt="${img.alt}">
-                <div class="modal-info">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                </div>
-                <button class="modal-close" aria-label="Close modal">&times;</button>
-            </div>
-        `;
-        
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        
-        // Focus trap for accessibility
-        const closeBtn = modal.querySelector('.modal-close');
-        closeBtn.focus();
-    });
-});
-
-modal.addEventListener('click', (e) => {
-    if (e.target === modal || e.target.classList.contains('modal-close')) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Form Validation and Submission
-const contactForm = document.getElementById('contact-form');
-const formGroups = contactForm.querySelectorAll('.form-group');
-const submitButton = contactForm.querySelector('.submit-button');
-
-// Validation patterns
-const patterns = {
-    name: /^[a-zA-Z\s]{2,50}$/,
-    email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    phone: /^[0-9]{10}$/,
-    service: /^(interior|exterior|paint-correction|ceramic-coating|steam-cleaning|seat-restoration)$/
-};
-
-// Error messages
-const errorMessages = {
-    name: 'Please enter a valid name (2-50 characters, letters only)',
-    email: 'Please enter a valid email address',
-    phone: 'Please enter a valid 10-digit phone number',
-    service: 'Please select a service',
-    message: 'Message cannot exceed 500 characters'
-};
-
-// Real-time validation
-formGroups.forEach(group => {
-    const input = group.querySelector('input, select, textarea');
-    if (!input) return;
-
-    const errorElement = group.querySelector('.error-message');
     
-    input.addEventListener('input', () => {
-        validateField(input, errorElement);
-        updateSubmitButton();
-    });
-
-    input.addEventListener('blur', () => {
-        validateField(input, errorElement);
-        updateSubmitButton();
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = 'none';
     });
 });
 
-function validateField(input, errorElement) {
-    const value = input.value.trim();
-    const fieldName = input.name;
-    let isValid = true;
-    let errorMessage = '';
+// Form validation
+const contactForm = document.querySelector('.contact-form');
 
-    // Skip validation for empty required fields on input
-    if (value === '' && input.required) {
-        if (input.type === 'email' || input.type === 'tel') {
-            isValid = false;
-            errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
-        } else {
-            return;
-        }
-    } else if (value !== '') {
-        if (patterns[fieldName] && !patterns[fieldName].test(value)) {
-            isValid = false;
-            errorMessage = errorMessages[fieldName];
-        }
-
-        if (fieldName === 'message' && value.length > 500) {
-            isValid = false;
-            errorMessage = errorMessages.message;
-        }
-    }
-
-    // Update UI
-    input.parentElement.classList.toggle('error', !isValid);
-    input.parentElement.classList.toggle('success', isValid && value !== '');
-    
-    if (errorElement) {
-        errorElement.textContent = errorMessage;
-        errorElement.style.display = isValid ? 'none' : 'block';
-    }
-
-    return isValid;
-}
-
-function updateSubmitButton() {
-    const isValid = Array.from(formGroups).every(group => {
-        const input = group.querySelector('input, select, textarea');
-        if (!input || !input.required) return true;
-        return validateField(input, group.querySelector('.error-message'));
-    });
-
-    submitButton.disabled = !isValid;
-}
-
-// Form submission
-contactForm.addEventListener('submit', async (e) => {
+contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    // Validate all fields
-    const isValid = Array.from(formGroups).every(group => {
-        const input = group.querySelector('input, select, textarea');
-        if (!input) return true;
-        return validateField(input, group.querySelector('.error-message'));
-    });
-
-    if (!isValid) {
-        showFormFeedback('Please correct the errors before submitting.', 'error');
-        return;
+    
+    // Basic form validation
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const service = document.getElementById('service');
+    const message = document.getElementById('message');
+    
+    let isValid = true;
+    
+    // Name validation
+    if (name.value.trim() === '') {
+        name.style.borderColor = '#ff4444';
+        isValid = false;
+    } else {
+        name.style.borderColor = '#ffd700';
     }
-
-    // Show loading state
-    submitButton.classList.add('loading');
-    submitButton.disabled = true;
-
-    try {
-        // Simulate form submission (replace with actual API call)
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        // Show success message
-        showFormFeedback('Thank you for your inquiry! We will contact you shortly.', 'success');
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+        email.style.borderColor = '#ff4444';
+        isValid = false;
+    } else {
+        email.style.borderColor = '#ffd700';
+    }
+    
+    // Phone validation
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone.value.replace(/\D/g, ''))) {
+        phone.style.borderColor = '#ff4444';
+        isValid = false;
+    } else {
+        phone.style.borderColor = '#ffd700';
+    }
+    
+    // Service validation
+    if (service.value === '') {
+        service.style.borderColor = '#ff4444';
+        isValid = false;
+    } else {
+        service.style.borderColor = '#ffd700';
+    }
+    
+    // Message validation
+    if (message.value.trim() === '') {
+        message.style.borderColor = '#ff4444';
+        isValid = false;
+    } else {
+        message.style.borderColor = '#ffd700';
+    }
+    
+    if (isValid) {
+        // Here you would typically send the form data to a server
+        // For now, we'll just show a success message
+        const submitButton = contactForm.querySelector('.submit-button');
+        submitButton.textContent = 'Message Sent!';
+        submitButton.style.backgroundColor = '#4CAF50';
+        
+        // Reset form
         contactForm.reset();
-        formGroups.forEach(group => {
-            group.classList.remove('success', 'error');
-        });
-    } catch (error) {
-        showFormFeedback('An error occurred. Please try again later.', 'error');
-    } finally {
-        submitButton.classList.remove('loading');
-        updateSubmitButton();
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitButton.textContent = 'Send Message';
+            submitButton.style.backgroundColor = '';
+        }, 3000);
     }
 });
 
-function showFormFeedback(message, type) {
-    const successMessage = document.getElementById('success-message');
-    const errorMessage = document.getElementById('form-error');
+// Input field focus effects
+const formInputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
 
-    if (type === 'success') {
-        successMessage.textContent = message;
-        successMessage.style.display = 'block';
-        errorMessage.style.display = 'none';
-    } else {
-        errorMessage.textContent = message;
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
-    }
+formInputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', () => {
+        input.parentElement.classList.remove('focused');
+    });
+});
 
-    // Scroll to feedback
-    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
+// Parallax effect for hero section
+const hero = document.querySelector('.hero');
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+});
 
-// Intersection Observer for Fade-in Effects with improved performance
+// Intersection Observer for fade-in animations
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -343,9 +210,40 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.fade-in-element').forEach(element => {
-    observer.observe(element);
+document.querySelectorAll('.service-card, .feature, .info-item').forEach(el => {
+    observer.observe(el);
 });
 
-// Add touch support for mobile devices
-document.addEventListener('touchstart', function() {}, {passive: true}); 
+// Add smooth hover effect to all buttons
+const buttons = document.querySelectorAll('button, .cta-button, .service-cta');
+
+buttons.forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-2px)';
+        button.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
+    });
+    
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translateY(0)';
+        button.style.boxShadow = 'none';
+    });
+});
+
+// Add ripple effect to buttons
+buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const x = e.clientX - e.target.offsetLeft;
+        const y = e.clientY - e.target.offsetTop;
+        
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+}); 
