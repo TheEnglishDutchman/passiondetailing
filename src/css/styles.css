@@ -206,18 +206,18 @@ h2::after {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    padding: 1.5rem 0;
+    width: 100%;
     z-index: 1000;
-    transition: all var(--transition-speed) ease;
-    background-color: transparent;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .navbar.scrolled {
-    background-color: rgba(26, 26, 26, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.nav-hidden {
+    transform: translateY(-100%);
 }
 
 .navbar-container {
@@ -279,7 +279,7 @@ h2::after {
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0.5rem;
-    transition: transform var(--transition-speed) ease;
+    transition: transform 0.3s ease;
 }
 
 .mobile-menu-btn.active {
@@ -459,6 +459,7 @@ h2::after {
     perspective: 1000px;
     height: 400px;
     margin-bottom: 2rem;
+    cursor: pointer;
 }
 
 .service-card-inner {
@@ -752,6 +753,7 @@ h2::after {
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .nav-links.active {
@@ -833,6 +835,7 @@ h2::after {
     font-size: 3rem;
     color: var(--gold);
     margin-bottom: 1rem;
+    animation: pulse 2s infinite;
 }
 
 .loader-progress {
@@ -852,15 +855,6 @@ h2::after {
     height: 100%;
     background: var(--gold);
     animation: progress 1s ease-in-out infinite;
-}
-
-@keyframes progress {
-    0% {
-        left: -40%;
-    }
-    100% {
-        left: 100%;
-    }
 }
 
 /* Scroll Indicator */
@@ -1042,6 +1036,7 @@ h2::after {
     visibility: hidden;
     transition: all 0.3s ease;
     z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 #back-to-top.visible {
@@ -1057,7 +1052,7 @@ h2::after {
 /* Animations */
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
@@ -1127,42 +1122,77 @@ h2::after {
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal[style*="display: flex"] {
+    opacity: 1;
 }
 
 .modal-content {
     position: relative;
     max-width: 90%;
     max-height: 90vh;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
 }
 
-.modal-content img {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
+.modal[style*="display: flex"] .modal-content {
+    transform: scale(1);
+}
+
+.modal-info {
+    padding: 1.5rem;
+    background: var(--white);
+}
+
+.modal-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.modal-info p {
+    color: var(--text-muted);
 }
 
 .modal-close {
     position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
-    border: none;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary-color);
     color: var(--white);
-    font-size: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .modal-close:hover {
     transform: scale(1.1);
+    background: var(--gold);
 }
 
 /* Form Error Styles */
-.form-group input.error,
-.form-group textarea.error {
-    border-color: #ff4444;
-    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+.error-message {
+    color: #ff4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.form-group input.error + .error-message,
+.form-group textarea.error + .error-message {
+    display: block;
 }
 
 /* Service Card Flip Styles */
