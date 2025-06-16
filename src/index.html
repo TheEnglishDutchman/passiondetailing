@@ -10,280 +10,301 @@
     <meta property="og:title" content="Passion Detailing - Premium Car Detailing Services">
     <meta property="og:description" content="Experience the pinnacle of automotive detailing. Where excellence meets automotive artistry.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:url" content="https://passiondetailing.com">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Passion Detailing - Premium Car Detailing Services">
+    <meta name="twitter:description" content="Experience the pinnacle of automotive detailing. Where excellence meets automotive artistry.">
+    <meta name="twitter:image" content="images/og-image.jpg">
     
     <title>Passion Detailing | Premium Car Detailing Services</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Defer Non-Critical JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Back to Top Button -->
-    <a href="#" id="back-to-top" aria-label="Back to top">
-        <i class="fas fa-chevron-up"></i>
-    </a>
+    <button id="back-to-top" aria-label="Back to top" class="back-to-top">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
 
     <!-- Loading Animation -->
-    <div class="loader">
+    <div class="loader" role="status" aria-label="Loading">
         <div class="loader-content">
-            <div class="loader-logo">PD</div>
+            <div class="loader-logo" aria-hidden="true">PD</div>
             <div class="loader-progress"></div>
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-container">
-            <a href="#" class="logo">Passion Detailing</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
+            <a href="#" class="logo" aria-label="Passion Detailing Home">Passion Detailing</a>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" aria-current="page">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <h1>Passion Detailing</h1>
-            <p>Where Excellence Meets Automotive Artistry</p>
-            <a href="#contact" class="cta-button">Schedule Your Detail</a>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero" aria-label="Hero section">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1>Passion Detailing</h1>
+                <p>Where Excellence Meets Automotive Artistry</p>
+                <a href="#contact" class="cta-button">Schedule Your Detail</a>
             </div>
-            <div class="arrow">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="scroll-indicator" aria-hidden="true">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 data-aos="fade-up">Our Legacy</h2>
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-up" data-aos-delay="200">
-                    <p>At Passion Detailing, we don't just clean cars – we restore them to their pristine glory. With over a decade of expertise in luxury automotive care, we've perfected the art of detailing to an exacting standard that discerning clients have come to expect.</p>
-                    <p>Our master detailers combine traditional techniques with cutting-edge technology to deliver results that exceed expectations. Every vehicle that enters our facility receives the same meticulous attention to detail, regardless of its make or model.</p>
-                    <div class="about-features">
-                        <div class="feature" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-medal"></i>
-                            <h3>Expert Craftsmanship</h3>
-                            <p>Certified professionals with years of specialized training</p>
-                        </div>
-                        <div class="feature" data-aos="fade-up" data-aos-delay="600">
-                            <i class="fas fa-tools"></i>
-                            <h3>Premium Products</h3>
-                            <p>Only the finest detailing products and equipment</p>
-                        </div>
-                        <div class="feature" data-aos="fade-up" data-aos-delay="800">
-                            <i class="fas fa-star"></i>
-                            <h3>Uncompromising Quality</h3>
-                            <p>100% satisfaction guaranteed on all services</p>
+        <!-- About Section -->
+        <section id="about" class="about" aria-labelledby="about-title">
+            <div class="container">
+                <h2 id="about-title" data-aos="fade-up">Our Legacy</h2>
+                <div class="about-content">
+                    <div class="about-text" data-aos="fade-up" data-aos-delay="200">
+                        <p>At Passion Detailing, we don't just clean cars – we restore them to their pristine glory. With over a decade of expertise in luxury automotive care, we've perfected the art of detailing to an exacting standard that discerning clients have come to expect.</p>
+                        <p>Our master detailers combine traditional techniques with cutting-edge technology to deliver results that exceed expectations. Every vehicle that enters our facility receives the same meticulous attention to detail, regardless of its make or model.</p>
+                        <div class="about-features">
+                            <div class="feature" data-aos="fade-up" data-aos-delay="400">
+                                <i class="fas fa-medal" aria-hidden="true"></i>
+                                <h3>Expert Craftsmanship</h3>
+                                <p>Certified professionals with years of specialized training</p>
+                            </div>
+                            <div class="feature" data-aos="fade-up" data-aos-delay="600">
+                                <i class="fas fa-tools" aria-hidden="true"></i>
+                                <h3>Premium Products</h3>
+                                <p>Only the finest detailing products and equipment</p>
+                            </div>
+                            <div class="feature" data-aos="fade-up" data-aos-delay="800">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <h3>Uncompromising Quality</h3>
+                                <p>100% satisfaction guaranteed on all services</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 data-aos="fade-up">Our Premium Services</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Experience the pinnacle of automotive detailing excellence</p>
-            
-            <!-- Interior Services -->
-            <div class="services-group" data-aos="fade-up" data-aos-delay="400">
-                <h3>Interior Excellence</h3>
-                <div class="services-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="service-card-front">
-                            <i class="fas fa-couch"></i>
-                            <h4>Interior Detail</h4>
-                            <p>Comprehensive interior restoration and sanitization</p>
-                            <ul>
-                                <li>Deep carpet and upholstery cleaning</li>
-                                <li>Leather conditioning and restoration</li>
-                                <li>Complete surface detailing</li>
-                                <li>Advanced odor elimination</li>
-                            </ul>
-                            <a href="#contact" class="service-cta">Book Now</a>
-                        </div>
+        <!-- Services Section -->
+        <section id="services" class="services" aria-labelledby="services-title">
+            <div class="container">
+                <h2 id="services-title" data-aos="fade-up">Our Premium Services</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Experience the pinnacle of automotive detailing excellence</p>
+                
+                <!-- Interior Services -->
+                <div class="services-group" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Interior Excellence</h3>
+                    <div class="services-grid">
+                        <article class="service-card" data-aos="fade-up" data-aos-delay="600">
+                            <div class="service-card-front">
+                                <i class="fas fa-couch" aria-hidden="true"></i>
+                                <h4>Interior Detail</h4>
+                                <p>Comprehensive interior restoration and sanitization</p>
+                                <ul>
+                                    <li>Deep carpet and upholstery cleaning</li>
+                                    <li>Leather conditioning and restoration</li>
+                                    <li>Complete surface detailing</li>
+                                    <li>Advanced odor elimination</li>
+                                </ul>
+                                <a href="#contact" class="service-cta">Book Now</a>
+                            </div>
+                        </article>
+                        <article class="service-card" data-aos="fade-up" data-aos-delay="800">
+                            <div class="service-card-front">
+                                <i class="fas fa-spray-can" aria-hidden="true"></i>
+                                <h4>Steam Cleaning</h4>
+                                <p>Professional-grade sanitization and cleaning</p>
+                                <ul>
+                                    <li>High-temperature steam treatment</li>
+                                    <li>Bacterial and germ elimination</li>
+                                    <li>Stain removal and prevention</li>
+                                    <li>Eco-friendly process</li>
+                                </ul>
+                                <a href="#contact" class="service-cta">Book Now</a>
+                            </div>
+                        </article>
+                        <article class="service-card" data-aos="fade-up" data-aos-delay="1000">
+                            <div class="service-card-front">
+                                <i class="fas fa-car" aria-hidden="true"></i>
+                                <h4>Seat Restoration</h4>
+                                <p>Premium fabric and leather care</p>
+                                <ul>
+                                    <li>Professional seat cleaning</li>
+                                    <li>Color restoration</li>
+                                    <li>Fabric protection</li>
+                                    <li>Leather conditioning</li>
+                                </ul>
+                                <a href="#contact" class="service-cta">Book Now</a>
+                            </div>
+                        </article>
                     </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="800">
-                        <div class="service-card-front">
-                            <i class="fas fa-spray-can"></i>
-                            <h4>Steam Cleaning</h4>
-                            <p>Professional-grade sanitization and cleaning</p>
-                            <ul>
-                                <li>High-temperature steam treatment</li>
-                                <li>Bacterial and germ elimination</li>
-                                <li>Stain removal and prevention</li>
-                                <li>Eco-friendly process</li>
-                            </ul>
-                            <a href="#contact" class="service-cta">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="service-card-front">
-                            <i class="fas fa-car"></i>
-                            <h4>Seat Restoration</h4>
-                            <p>Premium fabric and leather care</p>
-                            <ul>
-                                <li>Professional seat cleaning</li>
-                                <li>Color restoration</li>
-                                <li>Fabric protection</li>
-                                <li>Leather conditioning</li>
-                            </ul>
-                            <a href="#contact" class="service-cta">Book Now</a>
-                        </div>
+                </div>
+
+                <!-- Exterior Services -->
+                <div class="services-group" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Exterior Perfection</h3>
+                    <div class="services-grid">
+                        <article class="service-card" data-aos="fade-up" data-aos-delay="600">
+                            <div class="service-card-front">
+                                <i class="fas fa-car-wash" aria-hidden="true"></i>
+                                <h4>Exterior Detail</h4>
+                                <p>Comprehensive exterior enhancement</p>
+                                <ul>
+                                    <li>Hand wash and premium drying</li>
+                                    <li>Clay bar treatment</li>
+                                    <li>Wheel and tire detailing</li>
+                                    <li>Paint protection</li>
+                                </ul>
+                                <a href="#contact" class="service-cta">Book Now</a>
+                            </div>
+                        </article>
+                        <article class="service-card" data-aos="fade-up" data-aos-delay="800">
+                            <div class="service-card-front">
+                                <i class="fas fa-paint-roller" aria-hidden="true"></i>
+                                <h4>Paint Correction</h4>
+                                <p>Professional paint restoration</p>
+                                <ul>
+                                    <li>Swirl mark removal</li>
+                                    <li>Scratch elimination</li>
+                                    <li>Paint clarity restoration</li>
+                                    <li>Long-lasting protection</li>
+                                </ul>
+                                <a href="#contact" class="service-cta">Book Now</a>
+                            </div>
+                        </article>
+                        <article class="service-card" data-aos="fade-up" data-aos-delay="1000">
+                            <div class="service-card-front">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                <h4>Ceramic Coating</h4>
+                                <p>Ultimate paint protection</p>
+                                <ul>
+                                    <li>Long-lasting protection</li>
+                                    <li>Enhanced gloss and depth</li>
+                                    <li>Easy maintenance</li>
+                                    <li>Chemical resistance</li>
+                                </ul>
+                                <a href="#contact" class="service-cta">Book Now</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Exterior Services -->
-            <div class="services-group" data-aos="fade-up" data-aos-delay="400">
-                <h3>Exterior Perfection</h3>
-                <div class="services-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="service-card-front">
-                            <i class="fas fa-car-wash"></i>
-                            <h4>Exterior Detail</h4>
-                            <p>Comprehensive exterior enhancement</p>
-                            <ul>
-                                <li>Hand wash and premium drying</li>
-                                <li>Clay bar treatment</li>
-                                <li>Wheel and tire detailing</li>
-                                <li>Paint protection</li>
-                            </ul>
-                            <a href="#contact" class="service-cta">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="800">
-                        <div class="service-card-front">
-                            <i class="fas fa-paint-roller"></i>
-                            <h4>Paint Correction</h4>
-                            <p>Professional paint restoration</p>
-                            <ul>
-                                <li>Swirl mark removal</li>
-                                <li>Scratch elimination</li>
-                                <li>Paint clarity restoration</li>
-                                <li>Long-lasting protection</li>
-                            </ul>
-                            <a href="#contact" class="service-cta">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="service-card-front">
-                            <i class="fas fa-shield-alt"></i>
-                            <h4>Ceramic Coating</h4>
-                            <p>Ultimate paint protection</p>
-                            <ul>
-                                <li>Long-lasting protection</li>
-                                <li>Enhanced gloss and depth</li>
-                                <li>Easy maintenance</li>
-                                <li>Chemical resistance</li>
-                            </ul>
-                            <a href="#contact" class="service-cta">Book Now</a>
-                        </div>
-                    </div>
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery" aria-labelledby="gallery-title">
+            <div class="container">
+                <h2 id="gallery-title" data-aos="fade-up">Our Work</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Witness the transformation of automotive excellence</p>
+                <div class="gallery-grid" role="list">
+                    <!-- Gallery items will be added dynamically via JavaScript -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2 data-aos="fade-up">Our Work</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Witness the transformation of automotive excellence</p>
-            <div class="gallery-grid">
-                <!-- Gallery items will be added dynamically via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 data-aos="fade-up">Get in Touch</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Schedule your premium detailing service today</p>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right" data-aos-delay="400">
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Location</h3>
-                        <p>123 Luxury Lane, Premium City</p>
+        <!-- Contact Section -->
+        <section id="contact" class="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 id="contact-title" data-aos="fade-up">Get in Touch</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Schedule your premium detailing service today</p>
+                <div class="contact-content">
+                    <div class="contact-info" data-aos="fade-right" data-aos-delay="400">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <h3>Location</h3>
+                            <p>123 Luxury Lane, Premium City</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <h3>Phone</h3>
+                            <p><a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@passiondetailing.com">info@passiondetailing.com</a></p>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <h3>Phone</h3>
-                        <p>+1 (555) 123-4567</p>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <p>info@passiondetailing.com</p>
-                    </div>
+                    <form class="contact-form" data-aos="fade-left" data-aos-delay="400" novalidate>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service</label>
+                            <select id="service" name="service" required aria-required="true">
+                                <option value="">Select a service</option>
+                                <option value="interior">Interior Detail</option>
+                                <option value="exterior">Exterior Detail</option>
+                                <option value="full">Full Detail</option>
+                                <option value="ceramic">Ceramic Coating</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
                 </div>
-                <form class="contact-form" data-aos="fade-left" data-aos-delay="600">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service</label>
-                        <select id="service" name="service" required>
-                            <option value="">Select a Service</option>
-                            <option value="interior">Interior Detail</option>
-                            <option value="exterior">Exterior Detail</option>
-                            <option value="full">Full Detail</option>
-                            <option value="paint">Paint Correction</option>
-                            <option value="ceramic">Ceramic Coating</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
@@ -300,12 +321,22 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-social">
-                    <h4>Follow Us</h4>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Interior Detail</a></li>
+                        <li><a href="#services">Exterior Detail</a></li>
+                        <li><a href="#services">Full Detail</a></li>
+                        <li><a href="#services">Ceramic Coating</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -314,11 +345,5 @@
             </div>
         </div>
     </footer>
-
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Custom Scripts -->
-    <script src="js/main.js"></script>
 </body>
 </html> 
